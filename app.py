@@ -82,7 +82,7 @@ if "アカウントが不正使用されました" in driver.page_source:
 #####################ハッシュタグ毎のループ
 #ハッシュタグ検索用のURL
 tag_search_url = "https://www.instagram.com/explore/tags/{}/?hl=ja"
-off = False #処理を終了する切り替えスイッチ
+off = False#処理を終了する切り替えスイッチ
 error_cnt = 0
 for word in words:
 
@@ -105,7 +105,7 @@ for word in words:
 
     #画像のhrefを格納した配列でループ処理
     for href in hrefList:
-	#すでにいいね！していた場合はスルー
+		#すでにいいね！していた場合はスルー
         if href in already_likes_url:
             print("[いいね！済]" + href)
         else:
@@ -129,8 +129,11 @@ for word in words:
                 fa = open(file_alu,'a')
                 fa.write(href + '\n')
                 fa.close()
-		
-		#この地点を通過する時にいいね！"max_limit_likes_counter"回超えてたら終了
+
+                #[ already_likes_url ] へいいねしたURLを追加
+                already_likes_url.append( href )
+
+		#この地点を通過する時にいいね！max_limit_likes_counter(デフォルト値500)回超えてたら終了
 		#BAN防止
                 if likes_cnt >= max_limit_likes_counter:
                     print("いいね！の上限回数({})を超えました。処理を終了します。".format(max_limit_likes_counter))
